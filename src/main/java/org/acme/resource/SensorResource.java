@@ -41,10 +41,10 @@ public class SensorResource {
     public Sensor atualizar(@PathParam("id") Long id, Sensor novo) {
         Sensor antigo = service.buscar(id);
         if (antigo == null) throw new EntidadeNaoEncontradaException("Sensor não encontrado");
-        antigo.tipo = novo.tipo;
-        antigo.localizacao = novo.localizacao;
-        antigo.status = novo.status;
-        antigo.regiao = novo.regiao;
+        antigo.setTipo(novo.getTipo());
+        antigo.setLocalizacao(novo.getLocalizacao());
+        antigo.setStatus(novo.getStatus());
+        antigo.setRegiao(novo.getRegiao());
         service.atualizar(antigo);
         return antigo;
     }

@@ -18,13 +18,13 @@ public class AlertaBO {
     // Retorna apenas alertas de nível crítico (nível >= 3)
     public List<Alerta> listarAlertasCriticos() {
         return alertaService.listar().stream()
-                .filter(alerta -> alerta.nivel != null && alerta.nivel >= 3)
+                .filter(alerta -> alerta.getNivel() != null && alerta.getNivel() >= 3)
                 .toList();
     }
 
     // Insere alerta com validação de nível
     public void inserirComValidacao(Alerta alerta) {
-        if (alerta.nivel == null || alerta.nivel < 1 || alerta.nivel > 5) {
+        if (alerta.getNivel() == null || alerta.getNivel() < 1 || alerta.getNivel() > 5) {
             throw new IllegalArgumentException("Nível do alerta deve estar entre 1 e 5.");
         }
         alertaService.inserir(alerta);

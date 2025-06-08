@@ -41,8 +41,8 @@ public class RegiaoResource {
     public Regiao atualizar(@PathParam("id") Long id, Regiao nova) {
         Regiao antiga = service.buscar(id);
         if (antiga == null) throw new EntidadeNaoEncontradaException("Região não encontrada");
-        antiga.nome = nova.nome;
-        antiga.descricao = nova.descricao;
+        antiga.setNome(nova.getNome());
+        antiga.setDescricao(nova.getDescricao());
         service.atualizar(antiga);
         return antiga;
     }

@@ -1,15 +1,51 @@
 package org.acme.model;
 
 import jakarta.persistence.*;
-
-import java.io.Serializable;
+import java.util.List;
 
 @Entity
-@Table(name = "REGIAO")
-public class Regiao implements Serializable {
+public class Regiao {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long id;
-    public String nome;
-    public String descricao;
+    private Long id;
+
+    private String nome;
+    private String descricao;
+
+    @OneToMany(mappedBy = "regiao")
+    private List<Sensor> sensores;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public List<Sensor> getSensores() {
+        return sensores;
+    }
+
+    public void setSensores(List<Sensor> sensores) {
+        this.sensores = sensores;
+    }
 }
+

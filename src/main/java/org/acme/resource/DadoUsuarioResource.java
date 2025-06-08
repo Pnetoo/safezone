@@ -41,9 +41,9 @@ public class DadoUsuarioResource {
     public DadoUsuario atualizar(@PathParam("id") Long id, DadoUsuario novo) {
         DadoUsuario antigo = service.buscar(id);
         if (antigo == null) throw new EntidadeNaoEncontradaException("Dado de usuário não encontrado");
-        antigo.descricao = novo.descricao;
-        antigo.dataHora = novo.dataHora;
-        antigo.usuario = novo.usuario;
+        antigo.setDescricao(novo.getDescricao());
+        antigo.setDataHora(novo.getDataHora());
+        antigo.setUsuario(novo.getUsuario());
         service.atualizar(antigo);
         return antigo;
     }

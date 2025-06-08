@@ -41,10 +41,10 @@ public class UsuarioResource {
     public Usuario atualizar(@PathParam("id") Long id, Usuario novo) {
         Usuario antigo = service.buscar(id);
         if (antigo == null) throw new EntidadeNaoEncontradaException("Usuário não encontrado");
-        antigo.nome = novo.nome;
-        antigo.email = novo.email;
-        antigo.telefone = novo.telefone;
-        antigo.tipo = novo.tipo;
+        antigo.setNome(novo.getNome());
+        antigo.setEmail(novo.getEmail());
+        antigo.setTelefone(novo.getTelefone());
+        antigo.setTipo(novo.getTipo());
         service.atualizar(antigo);
         return antigo;
     }
