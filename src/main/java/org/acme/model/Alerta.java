@@ -8,21 +8,25 @@ import java.time.LocalDateTime;
 public class Alerta {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // ou SEQUENCE conforme seu banco
     private Long id;
 
+    @Column(name = "MENSAGEM", length = 200)
     private String mensagem;
+
+    @Column(name = "NIVEL")
     private Integer nivel;
+
+    @Column(name = "DATA_HORA")
     private LocalDateTime dataHora;
 
-    @ManyToOne
-    @JoinColumn(name = "ID_SENSOR")
-    private Sensor sensor;
+    @Column(name = "ID_SENSOR")
+    private Long idSensor;
 
-    @ManyToOne
-    @JoinColumn(name = "ID_USUARIO")
-    private Usuario usuario;
+    @Column(name = "ID_USUARIO")
+    private Long idUsuario;
 
+    // Getters e setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
@@ -35,9 +39,9 @@ public class Alerta {
     public LocalDateTime getDataHora() { return dataHora; }
     public void setDataHora(LocalDateTime dataHora) { this.dataHora = dataHora; }
 
-    public Sensor getSensor() { return sensor; }
-    public void setSensor(Sensor sensor) { this.sensor = sensor; }
+    public Long getIdSensor() { return idSensor; }
+    public void setIdSensor(Long idSensor) { this.idSensor = idSensor; }
 
-    public Usuario getUsuario() { return usuario; }
-    public void setUsuario(Usuario usuario) { this.usuario = usuario; }
+    public Long getIdUsuario() { return idUsuario; }
+    public void setIdUsuario(Long idUsuario) { this.idUsuario = idUsuario; }
 }
