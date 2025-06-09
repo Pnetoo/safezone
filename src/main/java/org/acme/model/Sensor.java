@@ -1,11 +1,10 @@
 package org.acme.model;
 
 import jakarta.persistence.*;
-import java.io.Serializable;
 
 @Entity
 @Table(name = "SENSOR")
-public class Sensor{
+public class Sensor {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,9 +14,9 @@ public class Sensor{
     private String localizacao;
     private String status;
 
-    @ManyToOne
-    @JoinColumn(name = "ID_REGIAO")
-    private Regiao regiao;
+    // Trocar referência para Regiao por somente o id da regiao
+    @Column(name = "ID_REGIAO")
+    private Long idRegiao;
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
@@ -31,6 +30,6 @@ public class Sensor{
     public String getStatus() { return status; }
     public void setStatus(String status) { this.status = status; }
 
-    public Regiao getRegiao() { return regiao; }
-    public void setRegiao(Regiao regiao) { this.regiao = regiao; }
+    public Long getIdRegiao() { return idRegiao; }
+    public void setIdRegiao(Long idRegiao) { this.idRegiao = idRegiao; }
 }
