@@ -3,9 +3,9 @@ package org.acme.resource;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.*;
-import org.acme.exception.*;
-import org.acme.model.*;
-import org.acme.service.*;
+import org.acme.exception.EntidadeNaoEncontradaException;
+import org.acme.model.Usuario;
+import org.acme.service.UsuarioService;
 
 import java.util.List;
 
@@ -41,10 +41,12 @@ public class UsuarioResource {
     public Usuario atualizar(@PathParam("id") Long id, Usuario novo) {
         Usuario antigo = service.buscar(id);
         if (antigo == null) throw new EntidadeNaoEncontradaException("Usuário não encontrado");
+
         antigo.setNome(novo.getNome());
         antigo.setEmail(novo.getEmail());
         antigo.setTelefone(novo.getTelefone());
         antigo.setTipo(novo.getTipo());
+
         service.atualizar(antigo);
         return antigo;
     }

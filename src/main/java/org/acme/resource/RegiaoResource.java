@@ -3,9 +3,9 @@ package org.acme.resource;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.*;
-import org.acme.exception.*;
-import org.acme.model.*;
-import org.acme.service.*;
+import org.acme.exception.EntidadeNaoEncontradaException;
+import org.acme.model.Regiao;
+import org.acme.service.RegiaoService;
 
 import java.util.List;
 

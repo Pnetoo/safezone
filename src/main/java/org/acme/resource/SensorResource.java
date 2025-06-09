@@ -3,9 +3,9 @@ package org.acme.resource;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.*;
-import org.acme.exception.*;
-import org.acme.model.*;
-import org.acme.service.*;
+import org.acme.exception.EntidadeNaoEncontradaException;
+import org.acme.model.Sensor;
+import org.acme.service.SensorService;
 
 import java.util.List;
 
@@ -41,10 +41,12 @@ public class SensorResource {
     public Sensor atualizar(@PathParam("id") Long id, Sensor novo) {
         Sensor antigo = service.buscar(id);
         if (antigo == null) throw new EntidadeNaoEncontradaException("Sensor não encontrado");
+
         antigo.setTipo(novo.getTipo());
         antigo.setLocalizacao(novo.getLocalizacao());
         antigo.setStatus(novo.getStatus());
-        antigo.setRegiao(novo.getRegiao());
+        antigo.setIdRegiao(novo.getIdRegiao());
+
         service.atualizar(antigo);
         return antigo;
     }

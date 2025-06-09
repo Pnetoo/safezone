@@ -3,9 +3,9 @@ package org.acme.resource;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.*;
-import org.acme.exception.*;
-import org.acme.model.*;
-import org.acme.service.*;
+import org.acme.exception.EntidadeNaoEncontradaException;
+import org.acme.model.DadoUsuario;
+import org.acme.service.DadoUsuarioService;
 
 import java.util.List;
 
@@ -25,9 +25,9 @@ public class DadoUsuarioResource {
     @GET
     @Path("/{id}")
     public DadoUsuario buscar(@PathParam("id") Long id) {
-        DadoUsuario dado = service.buscar(id);
-        if (dado == null) throw new EntidadeNaoEncontradaException("Dado de usuário não encontrado");
-        return dado;
+        DadoUsuario d = service.buscar(id);
+        if (d == null) throw new EntidadeNaoEncontradaException("Dado do usuário não encontrado");
+        return d;
     }
 
     @POST
@@ -40,10 +40,12 @@ public class DadoUsuarioResource {
     @Path("/{id}")
     public DadoUsuario atualizar(@PathParam("id") Long id, DadoUsuario novo) {
         DadoUsuario antigo = service.buscar(id);
-        if (antigo == null) throw new EntidadeNaoEncontradaException("Dado de usuário não encontrado");
+        if (antigo == null) throw new EntidadeNaoEncontradaException("Dado do usuário não encontrado");
+
         antigo.setDescricao(novo.getDescricao());
         antigo.setDataHora(novo.getDataHora());
-        antigo.setUsuario(novo.getUsuario());
+        antigo.setIdUsuario(novo.getIdUsuario());
+
         service.atualizar(antigo);
         return antigo;
     }
@@ -51,8 +53,8 @@ public class DadoUsuarioResource {
     @DELETE
     @Path("/{id}")
     public Response deletar(@PathParam("id") Long id) {
-        DadoUsuario dado = service.buscar(id);
-        if (dado == null) throw new EntidadeNaoEncontradaException("Dado de usuário não encontrado");
+        DadoUsuario d = service.buscar(id);
+        if (d == null) throw new EntidadeNaoEncontradaException("Dado do usuário não encontrado");
         service.deletar(id);
         return Response.noContent().build();
     }
